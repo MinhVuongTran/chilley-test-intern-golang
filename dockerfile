@@ -2,8 +2,11 @@ FROM golang:1.21
 
 WORKDIR /app
 
+COPY go.mod go.sum ./
+RUN go mod download
+
 COPY . .
 
-RUN go build -o out ./cmd
+RUN go build -o /app/out ./cmd
 
-CMD ["./out"]
+CMD ["/app/out"]
